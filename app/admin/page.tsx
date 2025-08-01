@@ -2,8 +2,98 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import StatCard from '@/components/StatCard'
+import { getRecentAppointmentList } from '@/lib/actions/appointmentActions'
+import {columns,Payment} from '@/components/table/columns'
+import { DataTable } from '@/components/table/DataTable'
 
-const Admin = () => {
+
+async function getData(): Promise<Payment[]> {
+  // Fetch data from your API here.
+  return [
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+  ]
+}
+
+
+
+const Admin =async () => {
+
+    const data = await getData()
+
+    const appointments=await getRecentAppointmentList()
+
+
   return (
     <div className='mx-auto flex max-w-7xl flex-col space-y-14 text-white'>
         <header className='admin-header'>
@@ -36,7 +126,7 @@ const Admin = () => {
 
                 <StatCard
                 type="appointment"
-                count={5}
+                count={appointments.scheduledCount}
                 label="Scheduled appointments"
                 icon="/assets/icons/appointments.svg"
                 
@@ -44,7 +134,7 @@ const Admin = () => {
 
                 <StatCard
                 type="pending"
-                count={10}
+                count={appointments.pendingCount}
                 label="Pending appointments"
                 icon="/assets/icons/pending.svg"
                 
@@ -52,13 +142,15 @@ const Admin = () => {
 
                 <StatCard
                 type="appointment"
-                count={2}
+                count={appointments.cancelledCount}
                 label="Cancelled appointments"
                 icon="/assets/icons/cancelled.svg"
                 
                 />
 
             </section>
+
+            <DataTable columns={columns} data={data}/>
 
         </main>
 
