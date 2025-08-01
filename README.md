@@ -1,8 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MediFlow - Healthcare Management System
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) for healthcare appointment management.
+
+## Environment Setup
+
+Before running the application, you need to set up your environment variables. Create a `.env.local` file in the root directory with the following variables:
+
+```bash
+# Appwrite Configuration
+PROJECT_ID=your_appwrite_project_id
+API_KEY=your_appwrite_api_key
+DATABASE_ID=your_database_id
+PATIENT_COLLECTION_ID=your_patient_collection_id
+DOCTOR_COLLECTION_ID=your_doctor_collection_id
+APPOINTMENT_COLLECTION_ID=your_appointment_collection_id
+NEXT_PUBLIC_BUCKET_ID=your_bucket_id
+NEXT_PUBLIC_ENDPOINT=https://cloud.appwrite.io/v1
+```
+
+### Getting Appwrite Credentials
+
+1. Go to [Appwrite Console](https://console.appwrite.io/)
+2. Create a new project or select an existing one
+3. Go to Settings > API Keys to get your API key
+4. Go to Databases to get your database and collection IDs
+5. Go to Storage to get your bucket ID
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
