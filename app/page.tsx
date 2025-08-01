@@ -1,8 +1,11 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import React from "react";
 import Image from "next/image";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
+import PassKeyModal from "@/components/PassKeyModal";
 
 export default function Home({searchParams}:SearchParamProps) {
 
@@ -12,7 +15,15 @@ export default function Home({searchParams}:SearchParamProps) {
 
 
   return (
-    <div className="h-screen flex items-center justify-center text-white">
+
+    
+
+
+
+
+    <div className="h-screen flex  text-white">
+      {isAdmin && <PassKeyModal/>}
+
       <section className="remove-scrollbar container my-auto">
 
         <div className="sub-container max-w-[496px]">
@@ -28,6 +39,10 @@ export default function Home({searchParams}:SearchParamProps) {
 
           <div className="text-14-regular mt-20 justify-between  flex w-full">
             <p className="justify-items-end text-dark-600 sm:text-left">© 2024 MediFlow </p> 
+
+            <Link href="/?admin=true" className="text-green-500">
+            Admin
+            </Link>
 
            
 
