@@ -7,91 +7,15 @@ import {columns,Payment} from '@/components/table/columns'
 import { DataTable } from '@/components/table/DataTable'
 
 
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-  ]
-}
-
 
 
 const Admin =async () => {
 
-    const data = await getData()
+   
 
     const appointments=await getRecentAppointmentList()
+    console.log("Appointments from API:", appointments);
+
 
 
   return (
@@ -104,7 +28,8 @@ const Admin =async () => {
             height={32}
             width={162}
             alt="logo"
-            classNameh-8 w-fit
+            
+            className='h-8 w-fit'
             
             />
 
@@ -150,7 +75,7 @@ const Admin =async () => {
 
             </section>
 
-            <DataTable columns={columns} data={data}/>
+            <DataTable columns={columns} data={appointments.documents}/>
 
         </main>
 

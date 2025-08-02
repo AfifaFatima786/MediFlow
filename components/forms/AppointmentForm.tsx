@@ -12,6 +12,7 @@ import {
   Form,
  
 } from "@/components/ui/form"
+import { updateAppointment } from "@/lib/actions/appointmentActions"
 import { Input } from "@/components/ui/input"
 import CustomFormField from "../ui/CustomFormField"
 import Image from "next/image"
@@ -23,14 +24,18 @@ import { FormFieldType } from "./PatientForm"
 import { Doctors } from "@/constants"
 import { SelectItem } from "@/components/ui/select"
 import { createAppointment } from "@/lib/actions/appointmentActions"
+import { Appointment } from "@/types/appwrite.types"
+import { scheduler } from "timers/promises"
 
  
 const AppointmentForm=({
-    userId,patientId,type
+    userId,patientId,type,appointment,setOpen
 }:{
     userId:string;
     patientId:string,
-    type:"create" | "cancel" | "schedule"
+    type:"create" | "cancel" | "schedule",
+    appointment?: Appointment,
+    setOpen:(open:boolean)=>void;
 }) =>{
 
   const router=useRouter();
@@ -38,20 +43,24 @@ const AppointmentForm=({
   const [isLoading, setIsLoading] = useState(false)
 
   const AppointmentFormValidation=getAppointmentSchema(type)
+
+  console.log(appointment)
   
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryPhysician:"",
-      schedule:new Date(),
-      reason:"",
-      note:"",
-      cancellationReason:"",
+      primaryPhysician:appointment ? appointment.primaryPhysician : '',
+      schedule:appointment  ? new Date(appointment?.schedule): new Date(Date.now()),
+      reason:appointment ? appointment.reason : "",
+      note:appointment ? appointment.note : "",
+      cancellationReason:appointment?.cancellationReason || ""
     },
   })
  
   
   async function onSubmit(values: z.infer<typeof AppointmentFormValidation>)  {
+
+    console.log("submitting",{type})
     setIsLoading(true)
 
     let status;
@@ -73,8 +82,6 @@ const AppointmentForm=({
 
     try{
 
-      console.log(values.primaryPhysician)
-      console.log(values.schedule+"y hai")
       if(type==="create" && patientId){
         const appointmentData={
             userId,
@@ -103,6 +110,33 @@ const AppointmentForm=({
 
         }
       }
+      else{
+        const appointmentToUpdate={
+          userId,
+          appointmentId:appointment.$id!,
+          appointment:{
+            primaryPhysician:values?.primaryPhysician,
+            schedule:new Date(values?.schedule),
+            status:status as Status,
+            cancellationReason:values?.cancellationReason
+          },
+          type,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        }
+        const updatedAppointment= await updateAppointment(appointmentToUpdate)
+
+        if(updatedAppointment){
+          
+          form.reset()
+          setOpen(false)
+        }
+
+        
+  //setIsLoading(false)
+  setOpen(false) 
+
+
+      }
 
       }
     catch(error){
@@ -124,16 +158,16 @@ const AppointmentForm=({
 }, [type]);
 
   return (
-    <div className="h-screen overflow-auto">
+    <div className="  overflow-auto">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit) } className="space-y-5 flex-1">
 
-        <section className="mb-10 space-y-4">
+        {type==='create' && <section className="mb-10 space-y-4">
             <h1 className="header">New Appointment</h1>
 
             <p className="text-dark-700">Request a new appointment in 10 seconds</p>
 
-        </section>
+        </section>}
 
         {type!=="cancel" && (
             <>
