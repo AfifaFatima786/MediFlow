@@ -5,13 +5,18 @@ import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patientActions";
+import { getAppointment } from "@/lib/actions/appointmentActions";
+
 
 export default async function NewAppointment({params}:SearchParamProps) {
     //console.log(userId)
 
+
+
     const {userId}= await params;
 
     const patient=await getPatient(userId);
+    //const appointment = await getAppointment(appointmentId);
     console.log(patient)
   return (
     <div className="h-screen flex items-center justify-center text-white  ">
@@ -33,7 +38,7 @@ export default async function NewAppointment({params}:SearchParamProps) {
 
           
           />
-            <p className="justify-items-end text-dark-600 sm:text-left py-10">© 2024 MediFlow </p> 
+            <p className="justify-items-end text-dark-600 sm:text-left py-10">© 2024 MediFlows</p> 
 
            
 
