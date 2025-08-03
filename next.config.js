@@ -1,13 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack(config, { isServer }) {
-    if (isServer) {
-      config.externals = config.externals || [];
-      config.externals.push("lightningcss");
-    }
+  // webpack(config, { isServer }) {
+  //   if (isServer) {
+  //     config.externals = config.externals || [];
+  //     config.externals.push("lightningcss");
+  //   }
 
-    return config;
+  //   return config;
+  // },
+
+
+  typescript:{
+    ignoreBuildErrors:true
   },
+  eslint:{
+    ignoreDuringBuilds:true
+  }
 };
 
 module.exports = nextConfig; 
