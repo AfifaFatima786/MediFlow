@@ -107,7 +107,7 @@ console.log("Type of appointment.schedule:", typeof appointment.schedule);
 
         const smsMessage=
         `Hi, It's MediFlow.\n`+
-         `${type==='schedule' ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} `
+         `${type==='schedule' ? `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician} `
          :  `We regret to inform you that your appointment has been cancelled. Reason: ${appointment.cancellationReason}`
         }`
 
