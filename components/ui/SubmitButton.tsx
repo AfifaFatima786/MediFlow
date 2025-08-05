@@ -4,12 +4,14 @@ import Image from 'next/image'
 interface ButtonProps{
     isLoading:boolean,
     classname?:string,
-    children:React.ReactNode
+    children:React.ReactNode,
+    onClick?: () => void;
 }
 
-const SubmitButton = ({isLoading,classname,children}:ButtonProps) => {
+const SubmitButton = ({isLoading,classname,children,onClick}:ButtonProps) => {
   return (
-    <Button type='submit' disabled={isLoading} className={classname ?? 'shadow-primary-btn bg-green-700 rounded hover:bg-green-900 w-full'}>
+    <Button type='submit' disabled={isLoading} className={classname ?? 'shadow-primary-btn bg-green-700 rounded hover:bg-green-900 w-full'}
+    onClick={onClick}>
 
         {isLoading ? (
             <div className='flex items-center gap-4'>

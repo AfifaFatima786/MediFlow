@@ -24,12 +24,12 @@ const Admin =async () => {
             <Link href="/" className="cursor-pointer">
 
             <Image
-            src="/assets/icons/logo-full.svg"
-            height={32}
-            width={162}
+            src="/assets/icons/logo-full.jpg"
+            height={40}
+            width={400}
             alt="logo"
             
-            className='h-8 w-fit'
+            className='h-12 w-[100px]'
             
             />
 

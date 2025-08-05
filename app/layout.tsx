@@ -4,6 +4,10 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider"
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify"; 
+
+
 
 import { cn } from '../lib/utils'
 
@@ -36,6 +40,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
         {children} 
+        <ToastContainer />
         </ThemeProvider>
       </body>
     </html>

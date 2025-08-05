@@ -30,13 +30,7 @@ const Success = async ({ params, searchParams }: PageProps) => {
     <div className='flex flex-col items-center justify-center text-white h-screen max-h-screen px-4'>
       
       <div className='flex flex-col items-center text-center mb-10'>
-        <Image
-          src="/assets/icons/logo-full.svg"
-          height={1000}
-          width={1000}
-          alt="logo"
-          className="h-10 w-fit mb-6"
-        />
+        
 
         <Image
           src="/assets/gifs/success.gif"
@@ -80,10 +74,16 @@ const Success = async ({ params, searchParams }: PageProps) => {
       </section>
 
      
-      <div className='flex justify-center items-center mb-4'>
+      <div className='flex justify-center items-center mb-4 gap-10'>
         <Button variant="outline" className='shad-primary-btn rounded' asChild>
           <Link href={`/patients/${userId}/new-appointment`}>
             New Appointment
+          </Link>
+        </Button>
+
+        <Button variant="outline" className='shad-primary-btn rounded' asChild>
+          <Link href={'/'}>
+            Home
           </Link>
         </Button>
       </div>

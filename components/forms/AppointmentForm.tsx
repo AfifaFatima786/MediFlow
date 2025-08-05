@@ -12,6 +12,7 @@ import {
   Form,
  
 } from "@/components/ui/form"
+import { usePathname } from 'next/navigation';
 import { updateAppointment } from "@/lib/actions/appointmentActions"
 import { Input } from "@/components/ui/input"
 import CustomFormField from "../ui/CustomFormField"
@@ -26,6 +27,7 @@ import { SelectItem } from "@/components/ui/select"
 import { createAppointment } from "@/lib/actions/appointmentActions"
 import { Appointment } from "@/types/appwrite.types"
 import { scheduler } from "timers/promises"
+import { toast } from 'react-toastify';
 
  
 const AppointmentForm=({
@@ -39,8 +41,14 @@ const AppointmentForm=({
 }) =>{
 
   const router=useRouter();
+  const pathname = usePathname(); 
 
   const [isLoading, setIsLoading] = useState(false)
+  const handleClick = () => {
+    if (pathname === '/admin') {
+      toast.success("Message sent!");
+    }
+  };
 
   const AppointmentFormValidation=getAppointmentSchema(type)
 
@@ -131,8 +139,6 @@ const AppointmentForm=({
           setOpen(false)
         }
 
-        
-  //setIsLoading(false)
   setOpen(false) 
 
 
@@ -153,7 +159,7 @@ const AppointmentForm=({
 
   useEffect(() => {
   if (type === "cancel") setButtonLabel("Cancel appointment");
-  else if (type === "schedule") setButtonLabel("Schedule appointment");
+  else if (type === "schedule") setButtonLabel("Schedule appointments");
   else setButtonLabel("Create Appointment");
 }, [type]);
 
@@ -254,7 +260,7 @@ const AppointmentForm=({
 
         
         
-        <SubmitButton isLoading={isLoading} classname=  {type==="cancel" ? 'shad-danger-btn  w-full rounded mt-2' : 'shad-primary-btn w-full rounded mt-2'}
+        <SubmitButton onClick={handleClick}  isLoading={isLoading} classname=  {type==="cancel" ? 'shad-danger-btn  w-full rounded mt-2' : 'shad-primary-btn w-full rounded mt-2' }
         >
          {buttonLabel}
         </SubmitButton>

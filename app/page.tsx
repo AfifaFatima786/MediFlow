@@ -6,20 +6,18 @@ import Image from "next/image";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
 import PassKeyModal from "@/components/PassKeyModal";
-
-export default function Home({searchParams}:SearchParamProps) {
-
-  const isAdmin=searchParams.admin==='true'
+import { useSearchParams } from 'next/navigation';
 
 
+export default function Home() {
 
+  //const isAdmin=searchParams?.admin==='true'
+const searchParams = useSearchParams();
+  const isAdmin = searchParams.get('admin') === 'true';
 
   return (
 
-    
-
-
-
+  
 
     <div className="h-screen flex  text-white">
       {isAdmin && <PassKeyModal/>}
@@ -27,11 +25,13 @@ export default function Home({searchParams}:SearchParamProps) {
       <section className="remove-scrollbar container my-auto">
 
         <div className="sub-container max-w-[496px]">
-          <Image src="/assets/icons/logo-full.svg"
-          alt="patient"
-          height={1000}
-          width={1000}
-          className="mb-12  w-fit"
+          <Image 
+          src="/assets/icons/logo-full.jpg"
+            height={40}
+            width={400}
+            alt="logo"
+            
+            className='h-12 w-[100px] mb-2'
           
           />
 

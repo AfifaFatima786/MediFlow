@@ -23,11 +23,13 @@ export default async function NewAppointment({params}:SearchParamProps) {
       <section className="remove-scrollbar container my-auto">
 
         <div className="sub-container max-w-[860px] flex-1 justify-between">
-          <Image src="/assets/icons/logo-full.svg"
-          alt="patient"
-          height={1000}
-          width={1000}
-          className="mb-12  w-fit"
+          <Image 
+          src="/assets/icons/logo-full.jpg"
+            height={40}
+            width={400}
+            alt="logo"
+            
+            className='h-12 w-[100px] mb-2'
           
           />
 

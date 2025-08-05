@@ -7,24 +7,65 @@ import {InputFile} from 'node-appwrite/file'
 
 export const createUser=async (user:CreateUserParams )=>{
     try{
+        console.log("suer y h")
         console.log(user)
 
-        const newUser=await users.create(ID.unique(),user.email,user.phone,user.name)
+        const newUser=await users.create(ID.unique(),user.email,user.phone,"TempPassword@123",user.name)
+        console.log("new user")
         console.log({newUser})
         return newUser
 
     }
     catch(error : any){
-        if(error && error?.code==409){
-            const documents=await users.list([
-                Query.equal('email',[user.email])
-            ])
+         
+      if (error && error?.code === 409) {
+      const existingUser = await users.list([
+        Query.equal("email", [user.email]),
+      ]);
 
-            return documents?.users[0]
-        }
-        throw error
+      return existingUser.users[0];
     }
+    console.error("An error occurred while creating a new user:", error);
+  }
+    
 }
+
+// export const createUser = async (user: CreateUserParams) => {
+//   try {
+//     console.log("Creating user:", user);
+
+//     const newUser = await users.create(
+//       ID.unique(),
+//       user.email,
+//       user.phone,
+//       user.name
+//     );
+
+//     console.log("✅ New user created:", newUser);
+//     return newUser;
+
+//   } catch (error: any) {
+//     if (error?.code === 409) {
+//       console.warn("⚠️ User already exists, checking for fallback...");
+
+//       // ⚠ Appwrite users.list() doesn't support Query.equal("email") reliably
+//       // So we return null or a fake object instead of crashing
+//       return {
+//         $id: null,
+//         email: user.email,
+//         message: "User already exists, but exact match could not be fetched.",
+//         status: "exists",
+//       };
+//     }
+
+//     console.error("❌ Unexpected error during user creation:", error);
+//     throw error;
+//   }
+// };
+
+
+
+
 
 export const getUser=async (userId:string )=>{
     try{
