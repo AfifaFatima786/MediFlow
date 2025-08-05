@@ -1,26 +1,34 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
 import PassKeyModal from "@/components/PassKeyModal";
 import { useSearchParams } from 'next/navigation';
 
+function PassKeyWrapper() {
+  const searchParams = useSearchParams();
+  const isAdmin = searchParams.get('admin') === 'true';
+  return isAdmin ? <PassKeyModal /> : null;
+}
+
 
 export default function Home() {
 
-  //const isAdmin=searchParams?.admin==='true'
-const searchParams = useSearchParams();
-  const isAdmin = searchParams.get('admin') === 'true';
+//   //const isAdmin=searchParams?.admin==='true'
+// const searchParams = useSearchParams();
+//   const isAdmin = searchParams.get('admin') === 'true';
 
   return (
 
   
 
     <div className="h-screen flex  text-white">
-      {isAdmin && <PassKeyModal/>}
+       <Suspense fallback={null}>
+        <PassKeyWrapper />
+      </Suspense>
 
       <section className="remove-scrollbar container my-auto">
 
