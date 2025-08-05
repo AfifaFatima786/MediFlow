@@ -20,6 +20,9 @@ const fontSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "MediFlow",
   description: "A healthcare management system",
+  icons:{
+    icon:"/assets/icons/logo-full.jpg"
+  }
 };
 
 export default function RootLayout({

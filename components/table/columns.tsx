@@ -23,7 +23,7 @@ export const columns: ColumnDef<Appointment>[] = [
 
   {
     header:'ID',
-    cell:({row})=> <p className="text-14-medium">{RowExpanding.index+1}</p>
+    cell:({row})=> <p className="text-14-medium">{row.index+1}</p>
   },
 
   {
