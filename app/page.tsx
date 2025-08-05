@@ -26,7 +26,7 @@ export default function Home() {
   
 
     <div className="h-screen flex  text-white">
-       <Suspense fallback={null}>
+       <Suspense >
         <PassKeyWrapper />
       </Suspense>
 
